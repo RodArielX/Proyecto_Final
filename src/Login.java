@@ -3,8 +3,8 @@ import javax.swing.*;
 public class Login extends JFrame {
     private JPanel panel_login;
     private JButton INGRESARButton;
-    private JTextField textField1;
-    private JPasswordField passwordField1;
+    private JTextField user;
+    private JPasswordField contra;
     private JComboBox comboBox1;
 
     public Login(){
