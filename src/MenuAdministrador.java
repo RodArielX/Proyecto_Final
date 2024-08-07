@@ -3,6 +3,10 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.*;
 
 public class MenuAdministrador extends JFrame{
@@ -54,8 +58,8 @@ public class MenuAdministrador extends JFrame{
     private JButton VISUALIZARPRODUCTOSButton;
     private JButton SALIRButton4;
     private JPanel panel_visua_elimi;
-    private JTextField textField1;
-    private JButton VISUALIZARCAJEROSButton;
+    private JTextField cedula_cajero;
+    private JButton LIMPIARButton;
     private JButton SALIRButton5;
     private JButton ELIMINARButton1;
     private JLabel id_cajero;
@@ -69,6 +73,7 @@ public class MenuAdministrador extends JFrame{
     private JLabel user_cajero;
     private JLabel contra_cajero;
     private JButton BUSQUEDAButton;
+    private JTextField cedul_cajer;
 
     public MenuAdministrador (){
         super("MENU ADMINSTRADOR");
@@ -150,6 +155,7 @@ public class MenuAdministrador extends JFrame{
                 dispose();
             }
         });
+        //BOTON ELIMINAR PRODUCTOS
         ELIMINARButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -191,6 +197,32 @@ public class MenuAdministrador extends JFrame{
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
+            }
+        });
+        //BOTON ELMINAR CAJEROS
+        ELIMINARButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    EliminarCajero();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+        //BOTON PARA LIMPIAR LA INTERFAZ
+        LIMPIARButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Limpiar();
+            }
+        });
+        SALIRButton5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Login ventana_login = new Login();
+                ventana_login.iniciar();
+                dispose();
             }
         });
     }
@@ -236,7 +268,7 @@ public class MenuAdministrador extends JFrame{
 
     //REGISTRAR PRODUCTOS
 
-    public void RegistrarProductos()throws SQLException{
+    public void RegistrarProductos() throws SQLException {
         String nombre = nom_producto.getText();
         String descripcion = descrip_productos.getText();
         String precio = precio_prod.getText();
@@ -244,30 +276,40 @@ public class MenuAdministrador extends JFrame{
         String imagen = imagen_producto.getText();
 
         Connection connection = conexion();
-        String sql = "INSERT INTO Productos (nombre, descripcion, precio, stock, imagen)values(?,?,?,?,?)";
+        String sql = "INSERT INTO Productos (nombre, descripcion, precio, stock, imagen) values (?, ?, ?, ?, ?)";
         PreparedStatement pst = connection.prepareStatement(sql);
-        pst.setString(1,nombre);
-        pst.setString(2,descripcion);
-        pst.setFloat(3,Float.parseFloat(precio));
-        pst.setInt(4,Integer.parseInt(stock));
-        pst.setString(5,imagen);
+        pst.setString(1, nombre);
+        pst.setString(2, descripcion);
+        pst.setFloat(3, Float.parseFloat(precio));
+        pst.setInt(4, Integer.parseInt(stock));
 
-        int row = pst.executeUpdate();
-        if (row > 0){
-            JOptionPane.showMessageDialog(null,"Registro insertado correctamente", "Éxito",JOptionPane.INFORMATION_MESSAGE);
+        try {
+            File imagenFile = new File(imagen);
+            FileInputStream fis = new FileInputStream(imagenFile);
+            pst.setBlob(5, fis);
+
+            int row = pst.executeUpdate();
+            if (row > 0) {
+                JOptionPane.showMessageDialog(null, "Registro insertado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Error al leer el archivo de imagen: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+
         nom_producto.setText("");
         descrip_productos.setText("");
         precio_prod.setText("");
         stock_productos.setText("");
         imagen_producto.setText("");
+
         pst.close();
         connection.close();
     }
 
+
     //ACTUALIZAR PRODUCTOS
 
-    public void ActualizarProductos()throws SQLException{
+    public void ActualizarProductos() throws SQLException {
         String id_producto = id_pro.getText();
         String nombre_upd = actua_nom_pro.getText();
         String descrip_upd = actua_descrip_pro.getText();
@@ -275,31 +317,96 @@ public class MenuAdministrador extends JFrame{
         String stock_upd = actua_stock_pro.getText();
         String img_upd = actua_img_pro.getText();
 
-        Connection connection = conexion();
-        String checkSql = "SELECT COUNT(*) FROM Productos WHERE producto_id = ?";
-        PreparedStatement checkPst = connection.prepareStatement(checkSql);
-        checkPst.setString(1, id_producto);
-        ResultSet rs = checkPst.executeQuery();
-        if (rs.next() && rs.getInt(1) > 0){
-            String sql = "UPDATE Productos set nombre = ?, descripcion = ?, precio = ?, stock = ?, imagen = ? where producto_id = ?";
-            PreparedStatement pst = connection.prepareStatement(sql);
-            pst.setString(1,nombre_upd);
-            pst.setString(2,descrip_upd);
-            pst.setFloat(3,Float.parseFloat(precio_upd));
-            pst.setInt(4,Integer.parseInt(stock_upd));
-            pst.setString(5,img_upd);
-            pst.setInt(6,Integer.parseInt(id_producto));
+        Connection connection = null;
+        PreparedStatement checkPst = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        FileInputStream fis = null;
 
+        try {
+            connection = conexion();
 
-            int affectedRows = pst.executeUpdate();
-            if (affectedRows > 0) {
-                JOptionPane.showMessageDialog(null, "Producto actualizado exitosamente.","Éxito",JOptionPane.INFORMATION_MESSAGE);
+            // Check if the product exists
+            String checkSql = "SELECT COUNT(*) FROM Productos WHERE producto_id = ?";
+            checkPst = connection.prepareStatement(checkSql);
+            checkPst.setString(1, id_producto);
+            rs = checkPst.executeQuery();
+
+            if (rs.next() && rs.getInt(1) > 0) {
+                String sql = "UPDATE Productos SET nombre = ?, descripcion = ?, precio = ?, stock = ?, imagen = ? WHERE producto_id = ?";
+                pst = connection.prepareStatement(sql);
+                pst.setString(1, nombre_upd);
+                pst.setString(2, descrip_upd);
+                pst.setFloat(3, Float.parseFloat(precio_upd));
+                pst.setInt(4, Integer.parseInt(stock_upd));
+
+                // Check if the file exists and is accessible
+                File imagenFile = new File(img_upd);
+                if (imagenFile.exists() && !imagenFile.isDirectory()) {
+                    try {
+                        fis = new FileInputStream(imagenFile);
+                        pst.setBlob(5, fis);
+                    } catch (FileNotFoundException e) {
+                        JOptionPane.showMessageDialog(null, "Error al leer el archivo de imagen: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "El archivo de imagen no existe o no es accesible.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                pst.setInt(6, Integer.parseInt(id_producto));
+
+                int affectedRows = pst.executeUpdate();
+                if (affectedRows > 0) {
+                    JOptionPane.showMessageDialog(null, "Producto actualizado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error al actualizar el producto.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             } else {
-                JOptionPane.showMessageDialog(null, "Error al actualizar el producto.","Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No se encontró ningún producto con el ID proporcionado.", "Error", JOptionPane.ERROR_MESSAGE);
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "No se encontró ningún producto con el ID del producto digitado.","Error",JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error en la base de datos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (checkPst != null) {
+                try {
+                    checkPst.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
+
         id_pro.setText("");
         actua_nom_pro.setText("");
         actua_descrip_pro.setText("");
@@ -307,6 +414,9 @@ public class MenuAdministrador extends JFrame{
         actua_stock_pro.setText("");
         actua_img_pro.setText("");
     }
+
+
+
 
     //ELIMINAR PRODUCTOS
 
@@ -485,7 +595,7 @@ public class MenuAdministrador extends JFrame{
 
     //VISUALIZAR INFORMACION CAJEROS
     public void  InformacionCajero() throws SQLException {
-        String cedula_cajero = cedu_cajero.getText();
+        String cedula_cajero = cedul_cajer.getText();
         Connection conectar = conexion();
         String sql = "SELECT * FROM Cajero WHERE cedula_cajero = ?";
         PreparedStatement strm = conectar.prepareStatement(sql);
@@ -494,7 +604,7 @@ public class MenuAdministrador extends JFrame{
         if (rs.next()) {
             String busqueda = rs.getString("cedula_cajero");
             if (busqueda.equals(cedula_cajero)) {
-                id_cajero.setText(rs.getString("producto_id"));
+                id_cajero.setText(rs.getString("cajero_id"));
                 cedu_cajero.setText(rs.getString("cedula_cajero"));
                 nom_cajero.setText(rs.getString("nombres_cajero"));
                 apel_cajero.setText(rs.getString("apellidos_cajero"));
@@ -504,8 +614,14 @@ public class MenuAdministrador extends JFrame{
                 genero_cajero.setText(rs.getString("genero_cajero"));
                 user_cajero.setText(rs.getString("usuario_cajero"));
                 contra_cajero.setText(rs.getString("contraseña_cajero"));
+                cedul_cajer.setText("");
             }
-            /*id_cajero.setText("");
+
+        }
+    }
+    //LIMPIAR INTERFAZ
+    public void Limpiar(){
+        id_cajero.setText("");
             cedu_cajero.setText("");
             nom_cajero.setText("");
             apel_cajero.setText("");
@@ -514,8 +630,25 @@ public class MenuAdministrador extends JFrame{
             edad_cajero.setText("");
             genero_cajero.setText("");
             user_cajero.setText("");
-            contra_cajero.setText("");*/
+            contra_cajero.setText("");
+    }
+    //ELIMINAR CAJEROS
+    public void EliminarCajero()throws SQLException{
+        String cedula_cajero= cedul_cajer.getText();
+        Connection connection = conexion();
+        String sql = "DELETE FROM Cajero where cedula_cajero = ?";
+        PreparedStatement pst = connection.prepareStatement(sql);
+        pst.setString(1,cedula_cajero);
+
+        int row = pst.executeUpdate();
+        if (row > 0){
+            JOptionPane.showMessageDialog(null,"Cajero eliminado correctamente","",JOptionPane.INFORMATION_MESSAGE);
+        }else {
+            JOptionPane.showMessageDialog(null,"No se encontro ningun Cajero con el numero de cedula dado", "Error",JOptionPane.ERROR_MESSAGE);
         }
+        cedul_cajer.setText("");
+        connection.close();
+        pst.close();
     }
 
 
