@@ -67,6 +67,8 @@ public class Login extends JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecta. Intente de nuevo", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
+        user.setText("");
+        contra.setText("");
         pst.close();
         connection.close();
     }
