@@ -74,6 +74,8 @@ public class MenuAdministrador extends JFrame{
     private JLabel contra_cajero;
     private JButton BUSQUEDAButton;
     private JTextField cedul_cajer;
+    private JTable tabla_ventas;
+    private JButton SALIRButton6;
 
     public MenuAdministrador (){
         super("MENU ADMINSTRADOR");
@@ -87,6 +89,18 @@ public class MenuAdministrador extends JFrame{
         tabla_productos.getColumnModel().getColumn(5).setCellRenderer(new ImagenRender());
         try {
             cargarTodosLosProductos();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        //VISUALIZAR  DETALLE
+
+        String[] ventasColumnNames = {"ID Venta", "ID Producto","Nombre Cliente", "Cantidad","Nombre Cajero"};
+        DefaultTableModel ventasModel = new DefaultTableModel(ventasColumnNames, 0);
+        tabla_ventas.setModel(ventasModel);
+
+        try {
+            cargarTodosLosProductos1();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -160,9 +174,18 @@ public class MenuAdministrador extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    EliminarProductos();
+                    // Supongamos que obtienes el productoId de un campo de texto
+                    int productoId = Integer.parseInt(id_produ.getText());
+
+                    // Llamar al método EliminarProductos
+                    EliminarProductos(productoId);
+
+                    JOptionPane.showMessageDialog(null, "Producto eliminado exitosamente.");
                 } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Error al eliminar el producto.", "Error", JOptionPane.ERROR_MESSAGE);
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "ID de producto inválido.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -225,6 +248,39 @@ public class MenuAdministrador extends JFrame{
                 dispose();
             }
         });
+        SALIRButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Login ventana_login = new Login();
+                ventana_login.iniciar();
+                dispose();
+            }
+        });
+
+        SALIRButton6.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Login ventana_login = new Login();
+                ventana_login.iniciar();
+                dispose();
+            }
+        });
+        SALIRButton4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Login ventana_login = new Login();
+                ventana_login.iniciar();
+                dispose();
+            }
+        });
+        SALIRButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Login ventana_login = new Login();
+                ventana_login.iniciar();
+                dispose();
+            }
+        });
     }
     //Cargar
     public void cargarTodosLosProductos() throws SQLException {
@@ -253,6 +309,29 @@ public class MenuAdministrador extends JFrame{
             model.addRow(new Object[]{id, nombre, descripcion, precio, stock, icon});
         }
 
+        rs.close();
+        pstmt.close();
+        connection.close();
+    }
+
+    public void cargarTodosLosProductos1() throws SQLException {
+        Connection connection = conexion();
+        String sql = "SELECT * FROM DetalleVenta";
+        PreparedStatement pstmt = connection.prepareStatement(sql);
+        ResultSet rs = pstmt.executeQuery();
+
+        DefaultTableModel model = (DefaultTableModel) tabla_ventas.getModel();
+        model.setRowCount(0);
+
+        while (rs.next()) {
+            int id_vemta = rs.getInt("id_detalle");
+            int id_pro = rs.getInt("id_producto");
+            String nom_cli = rs.getString("nombre_cliente");
+            int cantidad = rs.getInt("cantidad");
+            String nom_cajero = rs.getString("nombre_cajero");
+
+            model.addRow(new Object[]{id_vemta, id_pro, nom_cli, cantidad, nom_cajero});
+        }
         rs.close();
         pstmt.close();
         connection.close();
@@ -420,79 +499,68 @@ public class MenuAdministrador extends JFrame{
 
     //ELIMINAR PRODUCTOS
 
-    public void EliminarProductos()throws SQLException{
-        String codigo_producto = id_produ.getText();
+    public void EliminarProductos(int productoId) throws SQLException {
         Connection connection = conexion();
-        String sql = "DELETE FROM Productos where producto_id = ?";
-        PreparedStatement pst = connection.prepareStatement(sql);
-        pst.setString(1,codigo_producto);
 
-        int row = pst.executeUpdate();
-        if (row > 0){
-            JOptionPane.showMessageDialog(null,"Producto eliminado correctamente","",JOptionPane.INFORMATION_MESSAGE);
-        }else {
-            JOptionPane.showMessageDialog(null,"No se encontro ningun producto", "Error",JOptionPane.ERROR_MESSAGE);
-        }
-        id_produ.setText("");
+        // Primero elimina los registros hijos en detalleventa
+        String deleteDetalleVenta = "DELETE FROM DetalleVenta WHERE id_producto = ?";
+        PreparedStatement pstmtDeleteDetalleVenta = connection.prepareStatement(deleteDetalleVenta);
+        pstmtDeleteDetalleVenta.setInt(1, productoId);
+        pstmtDeleteDetalleVenta.executeUpdate();
+        pstmtDeleteDetalleVenta.close();
+
+        // Luego elimina el registro en productos
+        String deleteProducto = "DELETE FROM Productos WHERE producto_id = ?";
+        PreparedStatement pstmtDeleteProducto = connection.prepareStatement(deleteProducto);
+        pstmtDeleteProducto.setInt(1, productoId);
+        pstmtDeleteProducto.executeUpdate();
+        pstmtDeleteProducto.close();
+
+
         connection.close();
-        pst.close();
     }
 
-    //VISUALIZACION Y BUSQUEDA DE PRODUCTOS
-
-    /*private void initTable() {
-        // Set up the table model with column titles
-        DefaultTableModel model = new DefaultTableModel(
-                new Object[][]{}, // No data initially
-                new String[]{"ID Producto", "Nombre", "Descripcion", "Precio", "Stock", "Imagen Producto"} // Column titles
-        );
-        tabla_productos.setModel(model);
-        // Ensure the table is visible and updated
-        panel_adminstrador.revalidate();
-        panel_adminstrador.repaint();
-    }*/
 
     public void BusquedaTotal() throws SQLException{
         Connection connection = conexion();
-            String query = "SELECT producto_id, nombre, descripcion, precio, stock, imagen FROM Productos;";
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
+        String query = "SELECT producto_id, nombre, descripcion, precio, stock, imagen FROM Productos;";
+        Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
 
-            DefaultTableModel model = (DefaultTableModel) tabla_productos.getModel();
-            model.setRowCount(0); // Clear existing data
-            while (rs.next()) {
-                Integer id_pro = rs.getInt("producto_id");
-                String nombre_producto = rs.getString("nombre");
-                String descripcion_producto = rs.getString("descripcion");
-                String precio_producto = rs.getString("precio");
-                String stock_producto = rs.getString("stock");
-                String imagen_producto = rs.getString("imagen");
+        DefaultTableModel model = (DefaultTableModel) tabla_productos.getModel();
+        model.setRowCount(0); // Clear existing data
+        while (rs.next()) {
+            Integer id_pro = rs.getInt("producto_id");
+            String nombre_producto = rs.getString("nombre");
+            String descripcion_producto = rs.getString("descripcion");
+            String precio_producto = rs.getString("precio");
+            String stock_producto = rs.getString("stock");
+            String imagen_producto = rs.getString("imagen");
 
-
-                model.addRow(new Object[]{id_pro, nombre_producto, descripcion_producto, precio_producto, stock_producto, imagen_producto});
-            }
+            model.addRow(new Object[]{id_pro, nombre_producto, descripcion_producto, precio_producto, stock_producto, imagen_producto});
         }
+    }
 
 
     public void Busqueda()throws SQLException {
         Connection connection = conexion();
-            String query = "SELECT producto_id, nombre, descripcion, precio, stock, imagen FROM Productos WHERE producto_id = ?;";
-            PreparedStatement pstmt = connection.prepareStatement(query);
-            pstmt.setInt(1, Integer.parseInt(id_produ.getText()));
-            ResultSet rs = pstmt.executeQuery();
+        String query = "SELECT producto_id, nombre, descripcion, precio, stock, imagen FROM Productos WHERE producto_id = ?;";
+        PreparedStatement pstmt = connection.prepareStatement(query);
+        pstmt.setInt(1, Integer.parseInt(id_produ.getText()));
+        ResultSet rs = pstmt.executeQuery();
 
-            DefaultTableModel model = (DefaultTableModel) tabla_productos.getModel();
-            model.setRowCount(0); // Clear existing data
-            while (rs.next()) {
-                Integer id_produ = rs.getInt("producto_id");
-                String nombre_produ = rs.getString("nombre");
-                String descripcion_produ = rs.getString("descripcion");
-                String precio_produ = rs.getString("precio");
-                String stock_produ = rs.getString("stock");
-                String imagen_produ = rs.getString("imagen");
-                model.addRow(new Object[]{id_produ, nombre_produ, descripcion_produ, precio_produ, stock_produ, imagen_produ});
-            }
+        DefaultTableModel model = (DefaultTableModel) tabla_productos.getModel();
+        model.setRowCount(0); // Clear existing data
+        while (rs.next()) {
+            Integer id_produ = rs.getInt("producto_id");
+            String nombre_produ = rs.getString("nombre");
+            String descripcion_produ = rs.getString("descripcion");
+            String precio_produ = rs.getString("precio");
+            String stock_produ = rs.getString("stock");
+            String imagen_produ = rs.getString("imagen");
+            model.addRow(new Object[]{id_produ, nombre_produ, descripcion_produ, precio_produ, stock_produ, imagen_produ});
         }
+    }
 
 
     //REGISTRAR CAJEROS
@@ -652,9 +720,11 @@ public class MenuAdministrador extends JFrame{
     }
 
 
+
+
     public void iniciar(){
         setVisible(true);
-        setSize(600,550);
+        setSize(770,600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
     }

@@ -1,36 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="MenuAdministrador">
-  <grid id="27dc6" binding="panel_adminstrador" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="panel_adminstrador" layout-manager="GridLayoutManager" row-count="10" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="581" height="705"/>
+      <xy x="20" y="20" width="775" height="837"/>
     </constraints>
-    <properties/>
+    <properties>
+      <background color="-10446345"/>
+    </properties>
     <border type="none"/>
     <children>
       <component id="a2c0" class="javax.swing.JLabel">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <font name="Vantage Regular" size="14" style="0"/>
           <text value="BIENVENIDO "/>
         </properties>
       </component>
       <component id="7c7b" class="javax.swing.JLabel">
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <font name="Vantage Regular" size="14" style="0"/>
           <text value="MENU ADMINISTRADOR"/>
         </properties>
       </component>
       <tabbedpane id="58995" binding="tabbedPane1" default-binding="true">
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="200" height="200"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <background color="-3156006"/>
+        </properties>
         <border type="none"/>
         <children>
           <grid id="1a8b4" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -38,7 +44,9 @@
             <constraints>
               <tabbedpane title="Gestionar Productos"/>
             </constraints>
-            <properties/>
+            <properties>
+              <background color="-6176024"/>
+            </properties>
             <border type="none"/>
             <children>
               <tabbedpane id="2a50d" binding="tabbedPane2" default-binding="true">
@@ -55,7 +63,9 @@
                     <constraints>
                       <tabbedpane title="Registrar"/>
                     </constraints>
-                    <properties/>
+                    <properties>
+                      <background color="-6176024"/>
+                    </properties>
                     <border type="none"/>
                     <children>
                       <component id="1db7e" class="javax.swing.JLabel">
@@ -63,6 +73,7 @@
                           <grid row="1" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
+                          <font name="Super Mario 256" size="14" style="0"/>
                           <text value="REGISTRO DE PRODUCTOS"/>
                         </properties>
                       </component>
@@ -71,6 +82,7 @@
                           <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
                         </constraints>
                         <properties>
+                          <font name="Super Mario 256" size="12" style="0"/>
                           <text value="Nombre:"/>
                         </properties>
                       </component>
@@ -87,6 +99,7 @@
                           <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
                         </constraints>
                         <properties>
+                          <font name="Super Mario 256" size="12" style="0"/>
                           <text value="Descripcion: "/>
                         </properties>
                       </component>
@@ -95,23 +108,8 @@
                           <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
                         </constraints>
                         <properties>
+                          <font name="Super Mario 256" size="12" style="0"/>
                           <text value="Precio: "/>
-                        </properties>
-                      </component>
-                      <component id="3dbc4" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="Stock:"/>
-                        </properties>
-                      </component>
-                      <component id="7e8a3" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="Imagen: "/>
                         </properties>
                       </component>
                       <component id="7b918" class="javax.swing.JButton" binding="SALIRButton" default-binding="true">
@@ -182,35 +180,66 @@
                           <grid row="8" column="1" row-span="1" col-span="2" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                         </constraints>
                       </hspacer>
+                      <component id="66c6e" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <icon value="img/edit.png"/>
+                          <text value=""/>
+                        </properties>
+                      </component>
+                      <component id="b133b" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font name="Super Mario 256" size="12" style="0"/>
+                          <text value="Stock:"/>
+                        </properties>
+                      </component>
+                      <component id="f84e0" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font name="Super Mario 256" size="12" style="0"/>
+                          <text value="Imagen: "/>
+                        </properties>
+                      </component>
                     </children>
                   </grid>
-                  <grid id="cbf60" binding="panel_visua_elimi" layout-manager="GridLayoutManager" row-count="5" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                  <grid id="cbf60" binding="panel_visua_elimi" layout-manager="GridLayoutManager" row-count="6" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                     <margin top="0" left="0" bottom="0" right="0"/>
                     <constraints>
                       <tabbedpane title="Visualizar y Eliminar"/>
                     </constraints>
-                    <properties/>
+                    <properties>
+                      <background color="-6176024"/>
+                    </properties>
                     <border type="none"/>
                     <children>
                       <component id="317b4" class="javax.swing.JLabel">
                         <constraints>
-                          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="8" use-parent-layout="false"/>
+                          <grid row="1" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="8" use-parent-layout="false"/>
                         </constraints>
                         <properties>
+                          <font name="Super Mario 256" size="14" style="0"/>
                           <text value="VISUALIZACION Y ELIMINACION DE PRODUCTOS"/>
                         </properties>
                       </component>
                       <component id="6f5bc" class="javax.swing.JLabel">
                         <constraints>
-                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                          <grid row="2" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
                         </constraints>
                         <properties>
+                          <font name="Super Mario 256" size="12" style="0"/>
                           <text value="ID Producto: "/>
                         </properties>
                       </component>
                       <component id="9c6c7" class="javax.swing.JTextField" binding="id_produ">
                         <constraints>
-                          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                          <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
                           </grid>
                         </constraints>
@@ -218,7 +247,7 @@
                       </component>
                       <component id="3bfd" class="javax.swing.JButton" binding="BUSCARPORIDButton" default-binding="true">
                         <constraints>
-                          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                          <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
                           <text value="BUSCAR POR ID"/>
@@ -226,7 +255,7 @@
                       </component>
                       <component id="a3d4b" class="javax.swing.JButton" binding="VISUALIZARPRODUCTOSButton" default-binding="true">
                         <constraints>
-                          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                          <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
                           <text value="VISUALIZAR PRODUCTOS"/>
@@ -234,7 +263,7 @@
                       </component>
                       <component id="de154" class="javax.swing.JButton" binding="ELIMINARButton" default-binding="true">
                         <constraints>
-                          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                          <grid row="5" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
                           <text value="ELIMINAR PRODUCTO"/>
@@ -242,7 +271,7 @@
                       </component>
                       <component id="4e6f6" class="javax.swing.JButton" binding="SALIRButton4" default-binding="true">
                         <constraints>
-                          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                          <grid row="5" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
                           <text value="SALIR"/>
@@ -250,12 +279,12 @@
                       </component>
                       <hspacer id="f5d90">
                         <constraints>
-                          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                          <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                         </constraints>
                       </hspacer>
                       <scrollpane id="d790b">
                         <constraints>
-                          <grid row="3" column="0" row-span="1" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                          <grid row="4" column="1" row-span="1" col-span="4" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties/>
                         <border type="none"/>
@@ -268,6 +297,39 @@
                           </component>
                         </children>
                       </scrollpane>
+                      <component id="27e90" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <icon value="img/look.png"/>
+                          <text value=""/>
+                        </properties>
+                      </component>
+                      <component id="594cb" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <icon value="img/trash.png"/>
+                          <text value=""/>
+                        </properties>
+                      </component>
+                      <hspacer id="73e51">
+                        <constraints>
+                          <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                      </hspacer>
+                      <hspacer id="4a207">
+                        <constraints>
+                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                      </hspacer>
+                      <hspacer id="65ac7">
+                        <constraints>
+                          <grid row="1" column="5" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                      </hspacer>
                     </children>
                   </grid>
                   <grid id="55473" layout-manager="GridLayoutManager" row-count="10" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -275,7 +337,9 @@
                     <constraints>
                       <tabbedpane title="Actualizar"/>
                     </constraints>
-                    <properties/>
+                    <properties>
+                      <background color="-6176024"/>
+                    </properties>
                     <border type="none"/>
                     <children>
                       <component id="953b5" class="javax.swing.JLabel">
@@ -283,15 +347,8 @@
                           <grid row="1" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="2" use-parent-layout="false"/>
                         </constraints>
                         <properties>
+                          <font name="Super Mario 256" size="14" style="0"/>
                           <text value="ACTUALIZACION DE PRODUCTOS"/>
-                        </properties>
-                      </component>
-                      <component id="6fce3" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="Nombre: "/>
                         </properties>
                       </component>
                       <component id="e3af1" class="javax.swing.JTextField" binding="actua_nom_pro">
@@ -301,38 +358,6 @@
                           </grid>
                         </constraints>
                         <properties/>
-                      </component>
-                      <component id="a63be" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="Descripcion: "/>
-                        </properties>
-                      </component>
-                      <component id="7db8c" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="Precio: "/>
-                        </properties>
-                      </component>
-                      <component id="80e39" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="Stock: "/>
-                        </properties>
-                      </component>
-                      <component id="8ec03" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="Imagen:"/>
-                        </properties>
                       </component>
                       <component id="f33ea" class="javax.swing.JTextField" binding="actua_descrip_pro">
                         <constraints>
@@ -407,6 +432,7 @@
                           <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
                         </constraints>
                         <properties>
+                          <font name="Super Mario 256" size="12" style="0"/>
                           <text value="ID_Producto: "/>
                         </properties>
                       </component>
@@ -417,6 +443,60 @@
                           </grid>
                         </constraints>
                         <properties/>
+                      </component>
+                      <component id="807ec" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <icon value="img/edit.png"/>
+                          <text value=""/>
+                        </properties>
+                      </component>
+                      <component id="7811c" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font name="Super Mario 256" size="12" style="0"/>
+                          <text value="Nombre: "/>
+                        </properties>
+                      </component>
+                      <component id="cc081" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font name="Super Mario 256" size="12" style="0"/>
+                          <text value="Descripcion: "/>
+                        </properties>
+                      </component>
+                      <component id="52b44" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font name="Super Mario 256" size="12" style="0"/>
+                          <text value="Precio: "/>
+                        </properties>
+                      </component>
+                      <component id="1beb2" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font name="Super Mario 256" size="12" style="0"/>
+                          <text value="Stock: "/>
+                        </properties>
+                      </component>
+                      <component id="253e1" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font name="Super Mario 256" size="12" style="0"/>
+                          <text value="Imagen: "/>
+                        </properties>
                       </component>
                     </children>
                   </grid>
@@ -441,12 +521,14 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <grid id="b850e" layout-manager="GridLayoutManager" row-count="13" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                  <grid id="b850e" layout-manager="GridLayoutManager" row-count="13" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                     <margin top="0" left="0" bottom="0" right="0"/>
                     <constraints>
                       <tabbedpane title="Registrar"/>
                     </constraints>
-                    <properties/>
+                    <properties>
+                      <background color="-6176024"/>
+                    </properties>
                     <border type="none"/>
                     <children>
                       <component id="6b558" class="javax.swing.JLabel">
@@ -454,15 +536,8 @@
                           <grid row="1" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
+                          <font name="Super Mario 256" size="14" style="0"/>
                           <text value="REGISTRO CAJEROS"/>
-                        </properties>
-                      </component>
-                      <component id="e219b" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="Nombres: "/>
                         </properties>
                       </component>
                       <component id="cb7bc" class="javax.swing.JTextField" binding="regi_nom_cajero">
@@ -473,35 +548,12 @@
                         </constraints>
                         <properties/>
                       </component>
-                      <component id="e616a" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="Apellidos: "/>
-                        </properties>
-                      </component>
-                      <component id="b79b2" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="Direccion: "/>
-                        </properties>
-                      </component>
-                      <component id="d3dc1" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="Telefono: "/>
-                        </properties>
-                      </component>
                       <component id="70388" class="javax.swing.JLabel">
                         <constraints>
                           <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
                         </constraints>
                         <properties>
+                          <font name="Super Mario 256" size="12" style="0"/>
                           <text value="C.I"/>
                         </properties>
                       </component>
@@ -512,22 +564,6 @@
                           </grid>
                         </constraints>
                         <properties/>
-                      </component>
-                      <component id="f6b08" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="Edad: "/>
-                        </properties>
-                      </component>
-                      <component id="54d73" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="Genero: "/>
-                        </properties>
                       </component>
                       <component id="3583" class="javax.swing.JTextField" binding="regi_apel_caje">
                         <constraints>
@@ -595,32 +631,11 @@
                           <grid row="12" column="1" row-span="1" col-span="2" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                         </constraints>
                       </hspacer>
-                      <vspacer id="28523">
-                        <constraints>
-                          <grid row="1" column="3" row-span="11" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-                        </constraints>
-                      </vspacer>
                       <vspacer id="fd83e">
                         <constraints>
                           <grid row="1" column="0" row-span="11" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
                         </constraints>
                       </vspacer>
-                      <component id="e9db5" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="9" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="Usuario:"/>
-                        </properties>
-                      </component>
-                      <component id="402ce" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="10" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="Contraseña: "/>
-                        </properties>
-                      </component>
                       <component id="3b67c" class="javax.swing.JTextField" binding="regi_user_cajero">
                         <constraints>
                           <grid row="9" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
@@ -637,36 +652,126 @@
                         </constraints>
                         <properties/>
                       </component>
+                      <component id="55c50" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <icon value="img/register.png"/>
+                          <text value=""/>
+                        </properties>
+                      </component>
+                      <vspacer id="75916">
+                        <constraints>
+                          <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                      </vspacer>
+                      <component id="71cb6" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font name="Super Mario 256" size="12" style="0"/>
+                          <text value="Nombres:"/>
+                        </properties>
+                      </component>
+                      <component id="a5726" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font name="Super Mario 256" size="12" style="0"/>
+                          <text value="Apellidos:"/>
+                        </properties>
+                      </component>
+                      <component id="c9bd0" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font name="Super Mario 256" size="12" style="0"/>
+                          <text value="Direccion: "/>
+                        </properties>
+                      </component>
+                      <component id="36226" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font name="Super Mario 256" size="12" style="0"/>
+                          <text value="Telefono: "/>
+                        </properties>
+                      </component>
+                      <component id="7d4ea" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font name="Super Mario 256" size="12" style="0"/>
+                          <text value="Edad: "/>
+                        </properties>
+                      </component>
+                      <component id="b3ec" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font name="Super Mario 256" size="12" style="0"/>
+                          <text value="Genero: "/>
+                        </properties>
+                      </component>
+                      <component id="80412" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="9" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font name="Super Mario 256" size="12" style="0"/>
+                          <text value="Usuario: "/>
+                        </properties>
+                      </component>
+                      <component id="f9479" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="10" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font name="Super Mario 256" size="12" style="0"/>
+                          <text value="Contraseña: "/>
+                        </properties>
+                      </component>
                     </children>
                   </grid>
-                  <grid id="598ec" layout-manager="GridLayoutManager" row-count="4" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                  <grid id="598ec" layout-manager="GridLayoutManager" row-count="5" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                     <margin top="0" left="0" bottom="0" right="0"/>
                     <constraints>
                       <tabbedpane title="Visualizacion y Eliminar"/>
                     </constraints>
-                    <properties/>
+                    <properties>
+                      <background color="-6176024"/>
+                    </properties>
                     <border type="none"/>
                     <children>
                       <component id="25006" class="javax.swing.JLabel">
                         <constraints>
-                          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="10" use-parent-layout="false"/>
+                          <grid row="1" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="10" use-parent-layout="false"/>
                         </constraints>
                         <properties>
+                          <font name="Super Mario 256" size="14" style="0"/>
                           <text value="VISUALIZACION Y ELIIMINACION DE CAJEROS"/>
                         </properties>
                       </component>
                       <component id="4f95e" class="javax.swing.JLabel">
                         <constraints>
-                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                          <grid row="2" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
                         </constraints>
                         <properties>
+                          <font name="Super Mario 256" size="12" style="0"/>
                           <text value="Cedula: "/>
                         </properties>
                       </component>
                       <grid id="fe00f" layout-manager="GridLayoutManager" row-count="5" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                         <margin top="0" left="0" bottom="0" right="0"/>
                         <constraints>
-                          <grid row="2" column="0" row-span="1" col-span="3" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                          <grid row="3" column="1" row-span="1" col-span="4" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties/>
                         <border type="none"/>
@@ -835,7 +940,7 @@
                       </grid>
                       <component id="923d5" class="javax.swing.JButton" binding="LIMPIARButton" default-binding="true">
                         <constraints>
-                          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                          <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
                           <text value="LIMPIAR INTERFAZ"/>
@@ -843,7 +948,7 @@
                       </component>
                       <component id="3bf75" class="javax.swing.JButton" binding="SALIRButton5" default-binding="true">
                         <constraints>
-                          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                          <grid row="4" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
                           <text value="SALIR"/>
@@ -851,7 +956,7 @@
                       </component>
                       <component id="a8e02" class="javax.swing.JButton" binding="ELIMINARButton1" default-binding="true">
                         <constraints>
-                          <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                          <grid row="4" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
                           <text value="ELIMINAR CAJERO"/>
@@ -859,7 +964,7 @@
                       </component>
                       <component id="567e3" class="javax.swing.JButton" binding="BUSQUEDAButton" default-binding="true">
                         <constraints>
-                          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                          <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
                           <text value="BUSQUEDA"/>
@@ -867,20 +972,55 @@
                       </component>
                       <component id="bec70" class="javax.swing.JTextField" binding="cedul_cajer">
                         <constraints>
-                          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                          <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
                           </grid>
                         </constraints>
                         <properties/>
                       </component>
+                      <component id="beae0" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <icon value="img/trash.png"/>
+                          <text value=""/>
+                        </properties>
+                      </component>
+                      <component id="6c863" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <icon value="img/look.png"/>
+                          <text value=""/>
+                        </properties>
+                      </component>
+                      <hspacer id="cb588">
+                        <constraints>
+                          <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                      </hspacer>
+                      <hspacer id="d63fc">
+                        <constraints>
+                          <grid row="1" column="5" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                      </hspacer>
+                      <hspacer id="ae077">
+                        <constraints>
+                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                      </hspacer>
                     </children>
                   </grid>
-                  <grid id="b228" layout-manager="GridLayoutManager" row-count="13" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                  <grid id="b228" layout-manager="GridLayoutManager" row-count="13" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                     <margin top="0" left="0" bottom="0" right="0"/>
                     <constraints>
                       <tabbedpane title="Actualizar"/>
                     </constraints>
-                    <properties/>
+                    <properties>
+                      <background color="-6176024"/>
+                    </properties>
                     <border type="none"/>
                     <children>
                       <component id="8f894" class="javax.swing.JLabel">
@@ -888,15 +1028,8 @@
                           <grid row="1" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
+                          <font name="Super Mario 256" size="14" style="0"/>
                           <text value="ACTUALIZACION CAJEROS"/>
-                        </properties>
-                      </component>
-                      <component id="38ae9" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="Nombres: "/>
                         </properties>
                       </component>
                       <component id="1e33d" class="javax.swing.JTextField" binding="actua_nom_cajero">
@@ -909,35 +1042,12 @@
                           <text value=""/>
                         </properties>
                       </component>
-                      <component id="4bc32" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="Apellidos: "/>
-                        </properties>
-                      </component>
-                      <component id="64ef0" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="Direccion: "/>
-                        </properties>
-                      </component>
-                      <component id="a7175" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="Telefono: "/>
-                        </properties>
-                      </component>
                       <component id="c943" class="javax.swing.JLabel">
                         <constraints>
                           <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
                         </constraints>
                         <properties>
+                          <font name="Super Mario 256" size="12" style="0"/>
                           <text value="C.I"/>
                         </properties>
                       </component>
@@ -948,22 +1058,6 @@
                           </grid>
                         </constraints>
                         <properties/>
-                      </component>
-                      <component id="eaf9b" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="Edad: "/>
-                        </properties>
-                      </component>
-                      <component id="d5101" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="Genero: "/>
-                        </properties>
                       </component>
                       <component id="3438d" class="javax.swing.JTextField" binding="actua_apel_cajero">
                         <constraints>
@@ -1015,24 +1109,11 @@
                           <grid row="12" column="1" row-span="1" col-span="2" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                         </constraints>
                       </hspacer>
-                      <vspacer id="4208e">
-                        <constraints>
-                          <grid row="1" column="3" row-span="11" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-                        </constraints>
-                      </vspacer>
                       <vspacer id="91b52">
                         <constraints>
                           <grid row="1" column="0" row-span="11" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
                         </constraints>
                       </vspacer>
-                      <component id="37b76" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="9" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="Usuario: "/>
-                        </properties>
-                      </component>
                       <component id="8b9d7" class="javax.swing.JTextField" binding="actua_user_cajero">
                         <constraints>
                           <grid row="9" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
@@ -1040,14 +1121,6 @@
                           </grid>
                         </constraints>
                         <properties/>
-                      </component>
-                      <component id="ec367" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="10" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="Contraseña: "/>
-                        </properties>
                       </component>
                       <component id="ff135" class="javax.swing.JTextField" binding="actua_contra_cajero">
                         <constraints>
@@ -1073,23 +1146,212 @@
                           <text value="SALIR"/>
                         </properties>
                       </component>
+                      <component id="593ab" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <icon value="img/edit.png"/>
+                          <text value=""/>
+                        </properties>
+                      </component>
+                      <vspacer id="b9693">
+                        <constraints>
+                          <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                      </vspacer>
+                      <component id="35593" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font name="Super Mario 256" size="12" style="0"/>
+                          <text value="Nombres:"/>
+                        </properties>
+                      </component>
+                      <component id="4815c" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font name="Super Mario 256" size="12" style="0"/>
+                          <text value="Apellidos: "/>
+                        </properties>
+                      </component>
+                      <component id="d55ef" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font name="Super Mario 256" size="12" style="0"/>
+                          <text value="Direccion: "/>
+                        </properties>
+                      </component>
+                      <component id="dd318" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font name="Super Mario 256" size="12" style="0"/>
+                          <text value="Telefono: "/>
+                        </properties>
+                      </component>
+                      <component id="56f8f" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font name="Super Mario 256" size="12" style="0"/>
+                          <text value="Edad: "/>
+                        </properties>
+                      </component>
+                      <component id="1596b" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font name="Super Mario 256" size="12" style="0"/>
+                          <text value="Genero: "/>
+                        </properties>
+                      </component>
+                      <component id="df93c" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="9" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font name="Super Mario 256" size="12" style="0"/>
+                          <text value="Usuario: "/>
+                        </properties>
+                      </component>
+                      <component id="deca" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="10" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font name="Super Mario 256" size="12" style="0"/>
+                          <text value="Contraseña:"/>
+                        </properties>
+                      </component>
                     </children>
                   </grid>
                 </children>
               </tabbedpane>
             </children>
           </grid>
-          <grid id="82e20" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="82e20" layout-manager="GridLayoutManager" row-count="6" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <tabbedpane title="Informacion Ventas"/>
             </constraints>
-            <properties/>
+            <properties>
+              <background color="-6176024"/>
+            </properties>
             <border type="none"/>
-            <children/>
+            <children>
+              <scrollpane id="2c75f">
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="f7d8b" class="javax.swing.JTable" binding="tabla_ventas">
+                    <constraints/>
+                    <properties>
+                      <rowHeight value="30"/>
+                    </properties>
+                  </component>
+                </children>
+              </scrollpane>
+              <component id="a1d05" class="javax.swing.JButton" binding="SALIRButton6" default-binding="true">
+                <constraints>
+                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="SALIR"/>
+                </properties>
+              </component>
+              <component id="23a95" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <icon value="img/look.png"/>
+                  <text value=""/>
+                </properties>
+              </component>
+              <hspacer id="7ca08">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <component id="625f8" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="1" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Super Mario 256" size="14" style="0"/>
+                  <text value="INFORMACION VENTAS"/>
+                </properties>
+              </component>
+              <vspacer id="d6cee">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </vspacer>
+            </children>
           </grid>
         </children>
       </tabbedpane>
+      <component id="47ec6" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <icon value="img/admin_1.png"/>
+          <text value=""/>
+        </properties>
+      </component>
+      <vspacer id="e9cee">
+        <constraints>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+      <vspacer id="72c69">
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+      <vspacer id="46a75">
+        <constraints>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+      <vspacer id="c29e9">
+        <constraints>
+          <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+      <hspacer id="caf88">
+        <constraints>
+          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <hspacer id="3728c">
+        <constraints>
+          <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <vspacer id="c3acd">
+        <constraints>
+          <grid row="9" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+      <vspacer id="7a4d9">
+        <constraints>
+          <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
     </children>
   </grid>
 </form>
