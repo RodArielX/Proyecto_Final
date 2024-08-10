@@ -21,12 +21,15 @@ public class MenuCajero extends JFrame {
     private JTextField nom_cajero;
     private JTable table_ventas;
     private JButton VISUALIZARButton;
-    private JButton GENERARFACTURAButton;
 
+    /**
+     * Constructor de la clase MenuCajero que inicializa la ventana del menú del cajero.
+     */
     public MenuCajero(){
         super("MENU CAJERO");
         setContentPane(panel_menucajero);
 
+        // Configurar la tabla de productos
         String[] columnNames = {"ID Producto", "Nombre Producto", "Descripción", "Precio", "Stock", "Imagen Producto"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
         tabla_compra_pro.setModel(model);
@@ -39,17 +42,18 @@ public class MenuCajero extends JFrame {
             ex.printStackTrace();
         }
 
-        String[] ventasColumnNames = {"ID Venta", "ID Producto","Nombre Cliente", "Cantidad","Nombre Cajero"};
-        DefaultTableModel ventasModel = new DefaultTableModel(ventasColumnNames, 0);
-        table_ventas.setModel(ventasModel);
+    /*String[] ventasColumnNames = {"ID Venta", "ID Producto","Nombre Cliente", "Cantidad","Nombre Cajero"};
+    DefaultTableModel ventasModel = new DefaultTableModel(ventasColumnNames, 0);
+    table_ventas.setModel(ventasModel);
 
-        try {
-            cargarTodosLosProductos1();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
+    try {
+        cargarTodosLosProductos1();
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+    */
 
-
+        // Configurar el botón para visualizar todos los productos
         VISUALIZARTODOButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -60,6 +64,8 @@ public class MenuCajero extends JFrame {
                 }
             }
         });
+
+        // Configurar el botón para buscar un producto por ID
         BUSCARPORIDButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -70,6 +76,8 @@ public class MenuCajero extends JFrame {
                 }
             }
         });
+
+        // Configurar el botón para realizar una compra
         COMPRARButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -81,17 +89,19 @@ public class MenuCajero extends JFrame {
             }
         });
 
-        VISUALIZARButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    BusquedaDetalle();
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
+    /*VISUALIZARButton.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                BusquedaDetalle();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
             }
-        });
+        }
+    });
+    */
 
+        // Configurar el botón para generar una factura
         FACTURAButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -102,6 +112,8 @@ public class MenuCajero extends JFrame {
                 }
             }
         });
+
+        // Configurar el botón para salir de la aplicación
         SALIRButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -112,6 +124,10 @@ public class MenuCajero extends JFrame {
         });
     }
 
+    /**
+     * Carga todos los productos desde la base de datos y los muestra en la tabla.
+     * @throws SQLException Si ocurre un error en la consulta SQL.
+     */
     public void cargarTodosLosProductos() throws SQLException {
         Connection connection = conexion();
         String sql = "SELECT producto_id, nombre, descripcion, precio, stock, imagen FROM Productos";
@@ -143,46 +159,31 @@ public class MenuCajero extends JFrame {
         connection.close();
     }
 
-    public void cargarTodosLosProductos1() throws SQLException {
-        Connection connection = conexion();
-        String sql = "SELECT * FROM DetalleVenta";
-        PreparedStatement pstmt = connection.prepareStatement(sql);
-        ResultSet rs = pstmt.executeQuery();
-
-        DefaultTableModel model = (DefaultTableModel) table_ventas.getModel();
-        model.setRowCount(0);
-
-        while (rs.next()) {
-            int id_vemta = rs.getInt("id_detalle");
-            int id_pro = rs.getInt("id_producto");
-            String nom_cli = rs.getString("nombre_cliente");
-            int cantidad = rs.getInt("cantidad");
-            String nom_cajero = rs.getString("nombre_cajero");
-
-            model.addRow(new Object[]{id_vemta, id_pro, nom_cli, cantidad, nom_cajero});
-        }
-        rs.close();
-        pstmt.close();
-        connection.close();
-    }
-
-    //CONEXION A LA BASE DE DATOS
-    public Connection conexion()throws SQLException {
+    /**
+     * Establece la conexión con la base de datos.
+     * @return Connection La conexión a la base de datos.
+     * @throws SQLException Si ocurre un error al establecer la conexión.
+     */
+    public Connection conexion() throws SQLException {
         String url = "jdbc:mysql://localhost:3306/TiendaAccesorios";
         String user = "root";
         String password = "";
 
-        return DriverManager.getConnection(url,user,password);
+        return DriverManager.getConnection(url, user, password);
     }
-    //BUSQUEDA  TOTAL PRODUCTOS
-    public void BusquedaTotal() throws SQLException{
+
+    /**
+     * Realiza una búsqueda de todos los productos y muestra los resultados en la tabla.
+     * @throws SQLException Si ocurre un error en la consulta SQL.
+     */
+    public void BusquedaTotal() throws SQLException {
         Connection connection = conexion();
         String query = "SELECT producto_id, nombre, descripcion, precio, stock, imagen FROM Productos;";
         Statement stmt = connection.createStatement();
         ResultSet rs = stmt.executeQuery(query);
 
         DefaultTableModel model = (DefaultTableModel) tabla_compra_pro.getModel();
-        model.setRowCount(0); // Clear existing data
+        model.setRowCount(0); // Limpiar datos existentes
         while (rs.next()) {
             Integer id_pro = rs.getInt("producto_id");
             String nombre_producto = rs.getString("nombre");
@@ -194,28 +195,12 @@ public class MenuCajero extends JFrame {
             model.addRow(new Object[]{id_pro, nombre_producto, descripcion_producto, precio_producto, stock_producto, imagen_producto});
         }
     }
-    //BUSQUEDA TOTAL DETALLE
-    public void BusquedaDetalle() throws SQLException{
-        Connection connection = conexion();
-        String query = "SELECT * FROM DetalleVenta;";
-        Statement stmt = connection.createStatement();
-        ResultSet rs = stmt.executeQuery(query);
 
-        DefaultTableModel model = (DefaultTableModel) table_ventas.getModel();
-        model.setRowCount(0); // Clear existing data
-        while (rs.next()) {
-            Integer id_detalle = rs.getInt("id_detalle");
-            String id_produ = rs.getString("id_producto");
-            String nom_cli = rs.getString("nombre_cliente");
-            String stock = rs.getString("cantidad");
-            String nom_caje = rs.getString("nombre_cajero");
-
-            model.addRow(new Object[]{id_detalle, id_produ, nom_cli, stock, nom_caje});
-        }
-    }
-
-
-    public void Busqueda()throws SQLException {
+    /**
+     * Realiza una búsqueda de un producto por ID y muestra los resultados en la tabla.
+     * @throws SQLException Si ocurre un error en la consulta SQL.
+     */
+    public void Busqueda() throws SQLException {
         Connection connection = conexion();
         String query = "SELECT producto_id, nombre, descripcion, precio, stock, imagen FROM Productos WHERE producto_id = ?;";
         PreparedStatement pstmt = connection.prepareStatement(query);
@@ -223,7 +208,7 @@ public class MenuCajero extends JFrame {
         ResultSet rs = pstmt.executeQuery();
 
         DefaultTableModel model = (DefaultTableModel) tabla_compra_pro.getModel();
-        model.setRowCount(0); // Clear existing data
+        model.setRowCount(0); // Limpiar datos existentes
         while (rs.next()) {
             Integer id_produ = rs.getInt("producto_id");
             String nombre_produ = rs.getString("nombre");
@@ -235,6 +220,10 @@ public class MenuCajero extends JFrame {
         }
     }
 
+    /**
+     * Realiza una compra de un producto, actualiza el stock y registra la venta.
+     * @throws SQLException Si ocurre un error en la consulta SQL.
+     */
     public void realizarCompra() throws SQLException {
         int productoId = Integer.parseInt(id_pro_compra.getText());
         int cantidad = Integer.parseInt(cantidad_compra.getText());
@@ -272,13 +261,13 @@ public class MenuCajero extends JFrame {
                 // Actualizar tabla después de la compra
                 cargarTodosLosProductos();
             }
-            id_pro_compra.setText("");
-            cantidad_compra.setText("");
-            nombre_cliente.setText("");
-            nom_cajero.setText("");
         }
     }
 
+    /**
+     * Genera una factura para una compra realizada.
+     * @throws SQLException Si ocurre un error en la consulta SQL.
+     */
     public void generarFactura() throws SQLException {
         int productoId = Integer.parseInt(id_pro_compra.getText());
         int cantidad = Integer.parseInt(cantidad_compra.getText());
@@ -307,18 +296,22 @@ public class MenuCajero extends JFrame {
                     "IVA: " + iva + "\n" +
                     "Total a pagar: " + total;
 
-            // Mostrar la factura en un cuadro de diálogo
             JOptionPane.showMessageDialog(null, factura, "Factura", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "Producto no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
         }
-
+        id_pro_compra.setText("");
+        cantidad_compra.setText("");
+        nombre_cliente.setText("");
+        nom_cajero.setText("");
         rs.close();
         pstmtSelect.close();
         connection.close();
     }
 
-
+    /**
+     * Configura la ventana del menú del cajero.
+     */
     public void iniciar(){
         setVisible(true);
         setSize(800,600);

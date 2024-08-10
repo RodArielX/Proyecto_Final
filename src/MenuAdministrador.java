@@ -76,11 +76,18 @@ public class MenuAdministrador extends JFrame{
     private JTextField cedul_cajer;
     private JTable tabla_ventas;
     private JButton SALIRButton6;
+    private JTextField nomb_caj;
+    private JButton BUSCARButton;
+    private JLabel jLabelImagen;
 
+    /**
+     * Constructor de la clase MenuAdministrador que inicializa la ventana de administración del menú.
+     */
     public MenuAdministrador (){
         super("MENU ADMINSTRADOR");
         setContentPane(panel_adminstrador);
 
+        //Configuracion de la tabla de productos
         String[] columnNames = {"ID Producto", "Nombre Producto", "Descripción", "Precio", "Stock", "Imagen Producto"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
         tabla_productos.setModel(model);
@@ -94,7 +101,6 @@ public class MenuAdministrador extends JFrame{
         }
 
         //VISUALIZAR  DETALLE
-
         String[] ventasColumnNames = {"ID Venta", "ID Producto","Nombre Cliente", "Cantidad","Nombre Cajero"};
         DefaultTableModel ventasModel = new DefaultTableModel(ventasColumnNames, 0);
         tabla_ventas.setModel(ventasModel);
@@ -107,7 +113,6 @@ public class MenuAdministrador extends JFrame{
 
 
         //BOTON SALIR VENTANA REGISTRO PRODUCTO
-
         SALIRButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -174,12 +179,8 @@ public class MenuAdministrador extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    // Supongamos que obtienes el productoId de un campo de texto
                     int productoId = Integer.parseInt(id_produ.getText());
-
-                    // Llamar al método EliminarProductos
                     EliminarProductos(productoId);
-
                     JOptionPane.showMessageDialog(null, "Producto eliminado exitosamente.");
                 } catch (SQLException ex) {
                     ex.printStackTrace();
@@ -201,6 +202,7 @@ public class MenuAdministrador extends JFrame{
                 }
             }
         });
+        //BOTON QUE SE VISUALIZA UN REGISTRO DETERMINADO
         BUSCARPORIDButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -281,8 +283,21 @@ public class MenuAdministrador extends JFrame{
                 dispose();
             }
         });
+        BUSCARButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    BusquedaCajero();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
     }
-    //Cargar
+    /**
+     * Carga todos los productos desde la base de datos y los muestra en la tabla.
+     * @throws SQLException Si ocurre un error en la consulta SQL.
+     */
     public void cargarTodosLosProductos() throws SQLException {
         Connection connection = conexion();
         String sql = "SELECT producto_id, nombre, descripcion, precio, stock, imagen FROM Productos";
@@ -313,7 +328,10 @@ public class MenuAdministrador extends JFrame{
         pstmt.close();
         connection.close();
     }
-
+    /**
+     * Carga todos los detalles de ventas desde la base de datos y los muestra en la tabla.
+     * @throws SQLException Si ocurre un error en la consulta SQL.
+     */
     public void cargarTodosLosProductos1() throws SQLException {
         Connection connection = conexion();
         String sql = "SELECT * FROM DetalleVenta";
@@ -336,6 +354,11 @@ public class MenuAdministrador extends JFrame{
         pstmt.close();
         connection.close();
     }
+    /**
+     * Establece la conexión con la base de datos.
+     * @return Connection La conexión a la base de datos.
+     * @throws SQLException Si ocurre un error al establecer la conexión.
+     */
     //CONEXION A LA BASE DE DATOS
     public Connection conexion()throws SQLException {
         String url = "jdbc:mysql://localhost:3306/TiendaAccesorios";
@@ -344,7 +367,10 @@ public class MenuAdministrador extends JFrame{
 
         return DriverManager.getConnection(url,user,password);
     }
-
+    /**
+     * Registra un nuevo producto en la base de datos.
+     * @throws SQLException Si ocurre un error en la consulta SQL.
+     */
     //REGISTRAR PRODUCTOS
 
     public void RegistrarProductos() throws SQLException {
@@ -384,10 +410,11 @@ public class MenuAdministrador extends JFrame{
         pst.close();
         connection.close();
     }
-
-
+    /**
+     * Actualiza un producto existente en la base de datos.
+     * @throws SQLException Si ocurre un error en la consulta SQL.
+     */
     //ACTUALIZAR PRODUCTOS
-
     public void ActualizarProductos() throws SQLException {
         String id_producto = id_pro.getText();
         String nombre_upd = actua_nom_pro.getText();
@@ -405,7 +432,6 @@ public class MenuAdministrador extends JFrame{
         try {
             connection = conexion();
 
-            // Check if the product exists
             String checkSql = "SELECT COUNT(*) FROM Productos WHERE producto_id = ?";
             checkPst = connection.prepareStatement(checkSql);
             checkPst.setString(1, id_producto);
@@ -419,7 +445,6 @@ public class MenuAdministrador extends JFrame{
                 pst.setFloat(3, Float.parseFloat(precio_upd));
                 pst.setInt(4, Integer.parseInt(stock_upd));
 
-                // Check if the file exists and is accessible
                 File imagenFile = new File(img_upd);
                 if (imagenFile.exists() && !imagenFile.isDirectory()) {
                     try {
@@ -485,7 +510,6 @@ public class MenuAdministrador extends JFrame{
                 }
             }
         }
-
         id_pro.setText("");
         actua_nom_pro.setText("");
         actua_descrip_pro.setText("");
@@ -493,34 +517,32 @@ public class MenuAdministrador extends JFrame{
         actua_stock_pro.setText("");
         actua_img_pro.setText("");
     }
-
-
-
-
+    /**
+     * Elimina un producto de la base de datos.
+     * @param productoId El ID del producto a eliminar.
+     * @throws SQLException Si ocurre un error en la consulta SQL.
+     */
     //ELIMINAR PRODUCTOS
-
     public void EliminarProductos(int productoId) throws SQLException {
         Connection connection = conexion();
 
-        // Primero elimina los registros hijos en detalleventa
         String deleteDetalleVenta = "DELETE FROM DetalleVenta WHERE id_producto = ?";
         PreparedStatement pstmtDeleteDetalleVenta = connection.prepareStatement(deleteDetalleVenta);
         pstmtDeleteDetalleVenta.setInt(1, productoId);
         pstmtDeleteDetalleVenta.executeUpdate();
         pstmtDeleteDetalleVenta.close();
 
-        // Luego elimina el registro en productos
         String deleteProducto = "DELETE FROM Productos WHERE producto_id = ?";
         PreparedStatement pstmtDeleteProducto = connection.prepareStatement(deleteProducto);
         pstmtDeleteProducto.setInt(1, productoId);
         pstmtDeleteProducto.executeUpdate();
         pstmtDeleteProducto.close();
-
-
         connection.close();
     }
-
-
+    /**
+     * Realiza una búsqueda de productos y muestra los resultados.
+     * @throws SQLException Si ocurre un error en la consulta SQL.
+     */
     public void BusquedaTotal() throws SQLException{
         Connection connection = conexion();
         String query = "SELECT producto_id, nombre, descripcion, precio, stock, imagen FROM Productos;";
@@ -528,7 +550,7 @@ public class MenuAdministrador extends JFrame{
         ResultSet rs = stmt.executeQuery(query);
 
         DefaultTableModel model = (DefaultTableModel) tabla_productos.getModel();
-        model.setRowCount(0); // Clear existing data
+        model.setRowCount(0);
         while (rs.next()) {
             Integer id_pro = rs.getInt("producto_id");
             String nombre_producto = rs.getString("nombre");
@@ -540,8 +562,10 @@ public class MenuAdministrador extends JFrame{
             model.addRow(new Object[]{id_pro, nombre_producto, descripcion_producto, precio_producto, stock_producto, imagen_producto});
         }
     }
-
-
+    /**
+     * Realiza una búsqueda de un producto por ID y muestra los resultados.
+     * @throws SQLException Si ocurre un error en la consulta SQL.
+     */
     public void Busqueda()throws SQLException {
         Connection connection = conexion();
         String query = "SELECT producto_id, nombre, descripcion, precio, stock, imagen FROM Productos WHERE producto_id = ?;";
@@ -550,7 +574,7 @@ public class MenuAdministrador extends JFrame{
         ResultSet rs = pstmt.executeQuery();
 
         DefaultTableModel model = (DefaultTableModel) tabla_productos.getModel();
-        model.setRowCount(0); // Clear existing data
+        model.setRowCount(0);
         while (rs.next()) {
             Integer id_produ = rs.getInt("producto_id");
             String nombre_produ = rs.getString("nombre");
@@ -561,10 +585,11 @@ public class MenuAdministrador extends JFrame{
             model.addRow(new Object[]{id_produ, nombre_produ, descripcion_produ, precio_produ, stock_produ, imagen_produ});
         }
     }
-
-
+    /**
+     * Registra un nuevo cajero en la base de datos.
+     * @throws SQLException Si ocurre un error en la consulta SQL.
+     */
     //REGISTRAR CAJEROS
-
     public void RegistrarCajeros()throws SQLException{
         String cedula_cajero = cedu_regi_cajero.getText();
         String nombres_cajero = regi_nom_cajero.getText();
@@ -575,7 +600,6 @@ public class MenuAdministrador extends JFrame{
         String genero_cajero = regi_genero_cajero.getText();
         String usuario_cajero = regi_user_cajero.getText();
         String contraseña_cajero = regi_contra_cajero.getText();
-
 
         Connection connection = conexion();
         String sql = "INSERT INTO Cajero (cedula_cajero, nombres_cajero, apellidos_cajero, direccion_cajero, telefono_cajero, edad_cajero, genero_cajero, usuario_cajero, contraseña_cajero)values(?,?,?,?,?,?,?,?,?)";
@@ -607,9 +631,11 @@ public class MenuAdministrador extends JFrame{
         pst.close();
         connection.close();
     }
-
+    /**
+     * Actualiza un cajero existente en la base de datos.
+     * @throws SQLException Si ocurre un error en la consulta SQL.
+     */
     //ACTUALIZAR CAJEROS
-
     public void ActualizarCajero()throws SQLException{
         //String id_cajero_upd = id_cajero.getText();
         String cedula_cajero_upd = actua_cedu_cajero.getText();
@@ -660,7 +686,10 @@ public class MenuAdministrador extends JFrame{
         actua_user_cajero.setText("");
         actua_contra_cajero.setText("");
     }
-
+    /**
+     * Muestra la información del cajero.
+     * @throws SQLException Si ocurre un error en la consulta SQL.
+     */
     //VISUALIZAR INFORMACION CAJEROS
     public void  InformacionCajero() throws SQLException {
         String cedula_cajero = cedul_cajer.getText();
@@ -687,6 +716,9 @@ public class MenuAdministrador extends JFrame{
 
         }
     }
+    /**
+     * Limpia los campos de entrada del formulario.
+     */
     //LIMPIAR INTERFAZ
     public void Limpiar(){
         id_cajero.setText("");
@@ -700,6 +732,10 @@ public class MenuAdministrador extends JFrame{
             user_cajero.setText("");
             contra_cajero.setText("");
     }
+    /**
+     * Elimina un cajero de la base de datos.
+     * @throws SQLException Si ocurre un error en la consulta SQL.
+     */
     //ELIMINAR CAJEROS
     public void EliminarCajero()throws SQLException{
         String cedula_cajero= cedul_cajer.getText();
@@ -718,10 +754,33 @@ public class MenuAdministrador extends JFrame{
         connection.close();
         pst.close();
     }
+    /**
+     * Busca un cajero por ID y muestra los resultados.
+     * @throws SQLException Si ocurre un error en la consulta SQL.
+     */
+    public void BusquedaCajero()throws SQLException {
 
+        Connection connection = conexion();
+        String query = "SELECT * FROM DetalleVenta WHERE nombre_cajero =?;";
+        PreparedStatement pstmt = connection.prepareStatement(query);
+        pstmt.setString(1,nomb_caj.getText());
+        ResultSet rs = pstmt.executeQuery();
 
-
-
+        DefaultTableModel model = (DefaultTableModel) tabla_ventas.getModel();
+        model.setRowCount(0);
+        while (rs.next()) {
+            Integer id_ventas = rs.getInt("id_detalle");
+            String produ_id = rs.getString("id_producto");
+            String nombre_cliente = rs.getString("nombre_cliente");
+            String cantidad = rs.getString("cantidad");
+            String nomnre_caje = rs.getString("nombre_cajero");
+            model.addRow(new Object[]{id_ventas, produ_id, nombre_cliente, cantidad, nomnre_caje});
+        }
+    }
+    /**
+     * Inicia la ventana de inicio de sesión, configurando su visibilidad, tamaño,
+     * ubicación y acción predeterminada al cerrar.
+     */
     public void iniciar(){
         setVisible(true);
         setSize(770,600);
