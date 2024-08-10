@@ -165,9 +165,9 @@ public class MenuCajero extends JFrame {
      * @throws SQLException Si ocurre un error al establecer la conexión.
      */
     public Connection conexion() throws SQLException {
-        String url = "jdbc:mysql://localhost:3306/TiendaAccesorios";
-        String user = "root";
-        String password = "";
+        String url = "jdbc:mysql://uribtjckkrlatjt6:pIvotCQYz3hHKknvtLIw@bpr7lmf7sv069orulopo-mysql.services.clever-cloud.com:3306/bpr7lmf7sv069orulopo";
+        String user = "uribtjckkrlatjt6";
+        String password = "pIvotCQYz3hHKknvtLIw";
 
         return DriverManager.getConnection(url, user, password);
     }
