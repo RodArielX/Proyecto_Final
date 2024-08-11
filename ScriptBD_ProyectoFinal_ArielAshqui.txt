@@ -1,0 +1,71 @@
+CREATE DATABASE TiendaAccesorios;
+USE TiendaAccesorios;
+
+CREATE TABLE Administrador(
+	administrador_id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_admin VARCHAR(50),
+    contraseña_admin VARCHAR(50));
+    
+    INSERT INTO `tiendaaccesorios`.`administrador` (`usuario_admin`, `contraseña_admin`) VALUES ('ArielX16', 'Ariel123');
+
+CREATE TABLE Cajero(
+	cajero_id INT auto_increment primary key,
+    cedula_cajero int,
+    nombres_cajero varchar(50),
+    apellidos_cajero varchar(50),
+    direccion_cajero varchar(100),
+    telefono_cajero int,
+    edad_cajero int,
+    genero_cajero varchar(50),
+    usuario_cajero varchar(50),
+    contraseña_cajero varchar(50));
+    INSERT INTO `tiendaaccesorios`.`cajero` (`cedula_cajero`, `nombres_cajero`, `apellidos_cajero`, `direccion_cajero`, `telefono_cajero`, `edad_cajero`, `genero_cajero`, `usuario_cajero`, `contraseña_cajero`) VALUES ('1713036752', 'Edwin Rodrigo', 'Asqui Tanicuchi', 'La Comuna', '0998008817', '27', 'Masculino', 'EdwinAsqui', 'Edwin123');
+
+CREATE TABLE Productos (
+    producto_id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    precio DECIMAL(10, 2) NOT NULL,
+    stock INT NOT NULL,
+    imagen BLOB  -- Ruta de la imagen del producto
+);
+ALTER TABLE Productos MODIFY COLUMN imagen BLOB;
+ALTER TABLE Productos MODIFY COLUMN imagen LONGBLOB;
+
+insert into Productos(producto_id, nombre, descripcion, precio, stock, imagen) values (1,'Iphone','Cargador', 12.55, 12, load_file('F:\\Ariel Trabajos\\POO\\Proyecto_Final_Ariel\\src\\img\\cargador_iphone.jpg'));
+
+CREATE TABLE Transacciones (
+    id_transaccion INT AUTO_INCREMENT PRIMARY KEY,
+    cajero_id INT,
+    fecha DATETIME,
+    total DECIMAL(10, 2),
+    FOREIGN KEY (cajero_id) REFERENCES Cajero(cajero_id)
+);
+
+CREATE TABLE DetalleVenta(
+    id_detalle INT AUTO_INCREMENT PRIMARY KEY,
+    id_producto INT,
+    nombre_cliente VARCHAR(50),
+    cantidad INT,
+    nombre_cajero VARCHAR(50),
+    FOREIGN KEY (id_producto) REFERENCES Productos(producto_id)
+);
+
+CREATE TABLE Ventas (
+    venta_id INT AUTO_INCREMENT PRIMARY KEY,
+    id_cajero INT,
+    nombre_cajero VARCHAR (50),
+    total DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (id_cajero) REFERENCES Cajero(cajero_id)
+);
+
+CREATE TABLE DetallesVenta (
+    detalle_id INT AUTO_INCREMENT PRIMARY KEY,
+    venta_id INT,
+    producto_id INT,
+    cantidad INT NOT NULL,
+    precio_unitario DECIMAL(10, 2) NOT NULL,
+    subtotal DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (venta_id) REFERENCES Ventas(venta_id),
+    FOREIGN KEY (producto_id) REFERENCES Productos(producto_id)
+);
